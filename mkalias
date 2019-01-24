@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+"""
+    mkalias.py - CLI app to create finder aliases
+    Created by IAMCB
+
+"""
+
+import argparse
+
+
+def main():
+    print('Hello world')
+
+    arg_parser = argparse.ArgumentParser(prog='mkalias', usage='%(prog)s <Options>', description='Application to create Finder aliases from the command line')
+
+    arg_group = arg_parser.add_argument_group("Files")
+    arg_group.add_argument('-s', '--source-file', help='Source File to create alias from')
+    arg_group.add_argument('-d', '--dest-file', help='Destination location / filename of alias')
+
+    arg_group = arg_parser.add_argument_group("Directories")
+    arg_group.add_argument('-S', '--source-dir', help='Source directory to create alias from')
+    arg_group.add_argument('-D', '--dest-dir', help='Destination directory for alias')
+
+    args = arg_parser.parse_args()
+
+    print(args.source_file)
+    print(args.dest_file)
+
+
+if __name__ == "__main__":
+    main()
