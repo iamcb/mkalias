@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+"""
+    mkalias.py - CLI app to create finder aliases
+    Created by IAMCB
+
+"""
+
+import argparse
+import os
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(prog='mkalias',
+                                     description='Application to create Finder aliases from the command line')
+
+    parser.add_argument('source', help='Source to create alias from')
+    parser.add_argument('destination', help='Destination of alias')
+    parser.add_argument('-d', dest='is_dir', action='store_true',
+                        help='Use this option if creating and alias of a directory')
+
+    return parser.parse_args()
+
+
+def main():
+    args = parse_args()
+
+    source = os.path.abspath(args.source)
+    # source_head, source_tail = os.path.split(source)
+
+    destination = os.path.abspath(args.destination)
+    destination_head, destination_tail = os.path.split(destination)
+
+    print(destination_head)
+    print(destination_tail)
+
+    if args.is_dir:
+        if not os.path.isdir(source):
+            print("Source Directory '{}' not found!".format(source))
+        elif not os.path.isdir(destination_head):
+            print("Destination Directory '{}' not found!".format(destination_head))
+        else:
+            print("Source Dir - '{}'".format(source))
+            print("Destination Dir - '{}'".format(destination))
+    else:
+        if not os.path.isfile(source):
+            print("Source File '{}' not found!".format(source))
+        elif not os.path.isdir(destination_head):
+            print("Destination Directory '{}' not found!".format(destination_head))
+
+
+if __name__ == "__main__":
+    main()
