@@ -21,31 +21,52 @@ def parse_args():
     return parser.parse_args()
 
 
+def check_file(source, destination):
+    path_exists = True
+    source = os.path.abspath(source)
+    destination_head, destination_tail = os.path.split(destination)
+
+    if not os.path.isfile(source):
+        print("Source File '{}' not found!".format(source))
+        path_exists = False
+    elif not os.path.isdir(destination_head):
+        print("Destination Directory '{}' not found!".format(destination_head))
+        path_exists = False
+    else:
+        print("Source Dir - '{}'".format(source))
+        print("Destination Dir - '{}'".format(destination))
+
+    return path_exists
+
+
+def check_dir(source, destination):
+    path_exists = True
+    source = os.path.abspath(source)
+    destination_head, destination_tail = os.path.split(destination)
+
+    if not os.path.isdir(source):
+        print("Source Directory '{}' not found!".format(source))
+        path_exists = False
+    elif not os.path.isdir(destination_head):
+        print("Destination Directory '{}' not found!".format(destination_head))
+        path_exists = False
+    else:
+        print("Source Dir - '{}'".format(source))
+        print("Destination Dir - '{}'".format(destination))
+
+    return path_exists
+
+
 def main():
     args = parse_args()
 
     source = os.path.abspath(args.source)
-    # source_head, source_tail = os.path.split(source)
-
     destination = os.path.abspath(args.destination)
-    destination_head, destination_tail = os.path.split(destination)
-
-    print(destination_head)
-    print(destination_tail)
 
     if args.is_dir:
-        if not os.path.isdir(source):
-            print("Source Directory '{}' not found!".format(source))
-        elif not os.path.isdir(destination_head):
-            print("Destination Directory '{}' not found!".format(destination_head))
-        else:
-            print("Source Dir - '{}'".format(source))
-            print("Destination Dir - '{}'".format(destination))
+        check_dir(source, destination)
     else:
-        if not os.path.isfile(source):
-            print("Source File '{}' not found!".format(source))
-        elif not os.path.isdir(destination_head):
-            print("Destination Directory '{}' not found!".format(destination_head))
+        check_file(source, destination)
 
 
 if __name__ == "__main__":
