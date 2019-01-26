@@ -59,11 +59,6 @@ def main():
 
     check_path(source, destination, args.is_dir)
 
-    # if args.is_dir:
-    #     check_dir(source, destination)
-    # else:
-    #     check_file(source, destination)
-
 
 if __name__ == "__main__":
     main()
