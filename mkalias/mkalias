@@ -21,36 +21,30 @@ def parse_args():
     return parser.parse_args()
 
 
-def check_file(source, destination):
+def check_path(source, destination, isdir):
     path_exists = True
     source = os.path.abspath(source)
     destination_head, destination_tail = os.path.split(destination)
 
-    if not os.path.isfile(source):
-        print("Source File '{}' not found!".format(source))
-        path_exists = False
-    elif not os.path.isdir(destination_head):
-        print("Destination Directory '{}' not found!".format(destination_head))
-        path_exists = False
+    def print_not_found_error(location):
+        print("Error '{}' not found!".format(location))
+
+    if isdir:
+        if not os.path.isdir(source):
+            print_not_found_error(source)
+            path_exists = False
+        elif not os.path.isdir(destination_head):
+            print_not_found_error(destination_head)
+            path_exists = False
     else:
-        print("Source Dir - '{}'".format(source))
-        print("Destination Dir - '{}'".format(destination))
+        if not os.path.isfile(source):
+            print_not_found_error(source)
+            path_exists = False
+        elif not os.path.isdir(destination_head):
+            print_not_found_error(destination_head)
+            path_exists = False
 
-    return path_exists
-
-
-def check_dir(source, destination):
-    path_exists = True
-    source = os.path.abspath(source)
-    destination_head, destination_tail = os.path.split(destination)
-
-    if not os.path.isdir(source):
-        print("Source Directory '{}' not found!".format(source))
-        path_exists = False
-    elif not os.path.isdir(destination_head):
-        print("Destination Directory '{}' not found!".format(destination_head))
-        path_exists = False
-    else:
+    if path_exists:
         print("Source Dir - '{}'".format(source))
         print("Destination Dir - '{}'".format(destination))
 
@@ -63,10 +57,12 @@ def main():
     source = os.path.abspath(args.source)
     destination = os.path.abspath(args.destination)
 
-    if args.is_dir:
-        check_dir(source, destination)
-    else:
-        check_file(source, destination)
+    check_path(source, destination, args.is_dir)
+
+    # if args.is_dir:
+    #     check_dir(source, destination)
+    # else:
+    #     check_file(source, destination)
 
 
 if __name__ == "__main__":
