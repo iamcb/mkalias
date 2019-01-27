@@ -8,13 +8,15 @@
 import argparse
 import os
 
+import osascript
+
 
 def parse_args():
     parser = argparse.ArgumentParser(prog='mkalias',
                                      description='Application to create Finder aliases from the command line')
 
     parser.add_argument('source', help='Source to create alias from')
-    parser.add_argument('destination', help='Destination of alias')
+    parser.add_argument('destination', help='Destination directory of alias')
     parser.add_argument('-d', dest='is_dir', action='store_true',
                         help='Use this option if creating and alias of a directory')
 
@@ -58,6 +60,16 @@ def main():
     destination = os.path.abspath(args.destination)
 
     check_path(source, destination, args.is_dir)
+
+    command_string = 'tell application "Finder" to make alias file to POSIX file "{}" at POSIX file "{}"' \
+        .format(source, destination)
+
+    code, out, error = osascript.run(command_string)
+
+    print(command_string)
+    print(code)
+    print(out)
+    print(error)
 
 
 if __name__ == "__main__":
