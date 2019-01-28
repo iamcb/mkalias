@@ -61,6 +61,25 @@ def create_alias(source, destination):
     print(error)
 
 
+def rename_alias(source, destination, name):
+    """
+    Rename the new alias to a custom name instead of "example alias"
+
+    :param source: Name of the source file/dir for the alias
+    :param destination: destination for the alias
+    :return: none
+    """
+
+    source_head, source_tail = os.path.split(source)
+
+    alias_name = source_tail + " alias"
+    alias_path = destination + "/" + alias_name
+    new_name_path = destination + "/" + name
+
+    os.rename(alias_path, new_name_path)
+    print(new_name_path)
+
+
 def main():
     args = parse_args()
 
@@ -70,6 +89,9 @@ def main():
     check_path(source, destination)
 
     create_alias(source, destination)
+
+    if args.alias_name:
+        rename_alias(source, destination, args.alias_name)
 
 
 if __name__ == "__main__":
