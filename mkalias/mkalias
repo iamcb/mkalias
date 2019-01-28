@@ -17,13 +17,12 @@ def parse_args():
 
     parser.add_argument('source', help='Source to create alias from')
     parser.add_argument('destination', help='Destination directory of alias')
-    parser.add_argument('-d', dest='is_dir', action='store_true',
-                        help='Use this option if creating and alias of a directory')
+    parser.add_argument('-n', dest='alias_name', help='Set the name of the new alias')
 
     return parser.parse_args()
 
 
-def check_path(source, destination, isdir):
+def check_path(source, destination):
     path_exists = True
     source = os.path.abspath(source)
     destination_head, destination_tail = os.path.split(destination)
@@ -31,14 +30,12 @@ def check_path(source, destination, isdir):
     def print_not_found_error(location):
         print("Error '{}' not found!".format(location))
 
-    if isdir:
         if not os.path.isdir(source):
             print_not_found_error(source)
             path_exists = False
         elif not os.path.isdir(destination_head):
             print_not_found_error(destination_head)
             path_exists = False
-    else:
         if not os.path.isfile(source):
             print_not_found_error(source)
             path_exists = False
@@ -59,7 +56,7 @@ def main():
     source = os.path.abspath(args.source)
     destination = os.path.abspath(args.destination)
 
-    check_path(source, destination, args.is_dir)
+    check_path(source, destination)
 
     command_string = 'tell application "Finder" to make alias file to POSIX file "{}" at POSIX file "{}"' \
         .format(source, destination)
