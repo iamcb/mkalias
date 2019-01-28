@@ -50,14 +50,7 @@ def check_path(source, destination):
     return path_exists
 
 
-def main():
-    args = parse_args()
-
-    source = os.path.abspath(args.source)
-    destination = os.path.abspath(args.destination)
-
-    check_path(source, destination)
-
+def create_alias(source, destination):
     command_string = 'tell application "Finder" to make alias file to POSIX file "{}" at POSIX file "{}"' \
         .format(source, destination)
 
@@ -67,6 +60,19 @@ def main():
     print(code)
     print(out)
     print(error)
+
+
+def main():
+    args = parse_args()
+
+    source = os.path.abspath(args.source)
+    destination = os.path.abspath(args.destination)
+
+    check_path(source, destination)
+
+    create_alias(source, destination)
+
+
 
 
 if __name__ == "__main__":
