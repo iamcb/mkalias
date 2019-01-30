@@ -19,7 +19,7 @@ def parse_args():
     parser.add_argument('source', help='Source to create alias from')
     parser.add_argument('destination', help='Destination directory of alias')
     parser.add_argument('-n', dest='alias_name', metavar="Name", help='Set the name of the new alias')
-    parser.add_argument('--version', action='version', version='%(prog)s .{}'.format(__version__),
+    parser.add_argument('--version', action='version', version='%(prog)s v{}'.format(__version__),
                         help='Display version info')
 
     return parser.parse_args()
