@@ -8,13 +8,10 @@ import argparse
 import os
 
 import osascript
-from pkg_resources import get_distribution, DistributionNotFound
+# from . import __version__
+from setuptools_scm import get_version
 
-try:
-    __version__ = get_distribution(__name__).version
-except DistributionNotFound:
-    # package is not installed
-    pass
+version = get_version()
 
 
 def parse_args():
@@ -24,7 +21,7 @@ def parse_args():
     parser.add_argument('source', help='Source to create alias from')
     parser.add_argument('destination', help='Destination directory of alias')
     parser.add_argument('-n', dest='alias_name', metavar="Name", help='Set the name of the new alias')
-    parser.add_argument('--version', action='version', version='%(prog)s v{}'.format(__version__),
+    parser.add_argument('--version', action='version', version='%(prog)s v{}'.format(version),
                         help='Display version info')
 
     return parser.parse_args()
