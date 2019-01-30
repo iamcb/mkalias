@@ -8,7 +8,6 @@ import argparse
 import os
 
 import osascript
-# from . import __version__
 from setuptools_scm import get_version
 
 version = get_version()
