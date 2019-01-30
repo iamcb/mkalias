@@ -9,7 +9,7 @@ import os
 
 import osascript
 
-from . import version
+from . import __version__
 
 
 def parse_args():
@@ -19,7 +19,7 @@ def parse_args():
     parser.add_argument('source', help='Source to create alias from')
     parser.add_argument('destination', help='Destination directory of alias')
     parser.add_argument('-n', dest='alias_name', metavar="Name", help='Set the name of the new alias')
-    parser.add_argument('--version', action='version', version='%(prog)s .{}'.format(version),
+    parser.add_argument('--version', action='version', version='%(prog)s .{}'.format(__version__),
                         help='Display version info')
 
     return parser.parse_args()
@@ -84,8 +84,8 @@ def rename_alias(source, destination, name):
     print(new_name_path)
 
 
-def main(args):
-    # args = parse_args()
+def main():
+    args = parse_args()
 
     source = os.path.abspath(args.source)
     destination = os.path.abspath(args.destination)
@@ -99,4 +99,4 @@ def main(args):
 
 
 if __name__ == "__main__":
-    main(parse_args())
+    main()
