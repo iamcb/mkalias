@@ -1,3 +1,9 @@
 import mkalias.mkalias
 
-mkalias.mkalias.main()
+
+def main():
+    mkalias.mkalias.main()
+
+
+if __name__ == "__main__":
+    main()

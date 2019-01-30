@@ -15,6 +15,6 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts':
-            ['mkalias = mkalias.mkalias:main', ],
+            ['mkalias = mkalias.__main__:main', ],
     }
 )
