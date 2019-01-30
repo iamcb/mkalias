@@ -9,7 +9,7 @@ import os
 
 import osascript
 
-from ._version import __version__
+from . import __version__
 
 
 def parse_args():
