@@ -60,7 +60,7 @@ def create_alias(source, destination):
     code, out, error = osascript.run(command_string)
 
     print(command_string)
-    print(code)
+    # print(code)
     print(out)
     print(error)
 
