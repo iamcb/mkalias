@@ -8,6 +8,7 @@ setuptools.setup(
     description='CLI app to create Finder aliases in OS X',
     url='https://github.com/iamcb/mkalias',
     packages=['mkalias_cli'],
+    install_requires=['setuptools_scm', 'osascript', ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
