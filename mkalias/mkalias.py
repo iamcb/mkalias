@@ -9,7 +9,7 @@ import os
 
 import osascript
 
-from . import __version__
+from mkalias import __version__
 
 
 def parse_args():
