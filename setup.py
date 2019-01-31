@@ -1,13 +1,20 @@
 import setuptools
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 setuptools.setup(
-    name='mkalias',
+    name='mkalias-foss',
+    author='Adam Bennett',
+    author_email="iamcb@teck90.ca",
+    url='http://pypi.python.org/pypi/mkalias/',
     use_scm_version=True,
-    setup_requires=['setuptools_scm'],
+    license='LICENSE.txt',
     description='CLI app to create Finder aliases in OS X',
-    url='https://github.com/iamcb/mkalias',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     packages=['mkalias_cli'],
+    setup_requires=['setuptools_scm'],
     install_requires=['setuptools_scm', 'osascript', ],
     classifiers=[
         "Programming Language :: Python :: 3",
