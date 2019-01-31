@@ -4,33 +4,13 @@ Application to create Finder aliases from the command line
 
 ## Getting Started
 
-This project is available as a pip3 installable package
-
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+This project is available as a pip3 installable package from pypi.org
+the source can be downloaded from [GitHub](https://github.com/iamcb/mkalias)
 
 ### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
 ```
-Give the example
+pip3 install mkalias-foss
 ```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
@@ -43,18 +23,6 @@ Explain what these tests test and why
 ```
 Give an example
 ```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
