@@ -3,33 +3,23 @@ import os
 import osascript
 
 
-def check_path(source, destination):
+def check_path(path):
     """
-    Check if source directory/file and destination directory exists
-    :param source: Source directory or file
-    :param destination: Destination directory
-    :return: False if directory/file is not found, otherwise returns true
+    Check if file or directory path is valid
+    :param path: path to check
+    :return: true if path exists otherwise returns false
     """
     path_exists = True
-    source = os.path.abspath(source)
-    destination_head, destination_tail = os.path.split(destination)
 
     def print_not_found_error(location):
         print("Error '{}' not found!".format(location))
 
-    if not os.path.isdir(source):
-        print_not_found_error(source)
+    if not os.path.isdir(path):
+        print_not_found_error(path)
         path_exists = False
-    elif not os.path.isdir(destination_head):
-        print_not_found_error(destination_head)
+    elif not os.path.isfile(path):
+        print_not_found_error(path)
         path_exists = False
-    elif not os.path.isfile(source):
-        print_not_found_error(source)
-        path_exists = False
-
-    if path_exists:
-        print("Source Dir - '{}'".format(source))
-        print("Destination Dir - '{}'".format(destination))
 
     return path_exists
 

@@ -6,6 +6,7 @@
 
 import argparse
 import os
+import sys
 
 from setuptools_scm import get_version
 
@@ -38,9 +39,14 @@ def main():
     source = os.path.abspath(args.source)
     destination = os.path.abspath(args.destination)
 
-    utils.check_path(source, destination)
+    not_found_msg = '"{}" not found'
 
-    utils.create_alias(source, destination)
+    if not utils.check_path(source):
+        print(not_found_msg.format(source))
+        sys.exit(1)
+    elif not utils.check_path(destination):
+        print(not_found_msg.format(destination))
+        sys.exit(1)
 
     if args.alias_name:
         utils.rename_alias(source, destination, args.alias_name)
