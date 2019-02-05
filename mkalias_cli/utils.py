@@ -9,19 +9,14 @@ def check_path(path):
     :param path: path to check
     :return: true if path exists otherwise returns false
     """
-    path_exists = True
 
-    def print_not_found_error(location):
-        print("Error '{}' not found!".format(location))
+    not_found_msg = "Error '{}' not found!"
 
-    if not os.path.isdir(path):
-        print_not_found_error(path)
-        path_exists = False
-    elif not os.path.isfile(path):
-        print_not_found_error(path)
-        path_exists = False
-
-    return path_exists
+    if os.path.exists(path):
+        return True
+    else:
+        print(not_found_msg.format(path))
+        return False
 
 
 def create_alias(source, destination):
