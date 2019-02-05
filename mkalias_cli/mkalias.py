@@ -18,7 +18,6 @@ version = get_version()
 def parse_args():
     """
     Function to setup and hold argument parser
-
     :return: parser.parse_args() object -
     """
     parser = argparse.ArgumentParser(prog='mkalias',
