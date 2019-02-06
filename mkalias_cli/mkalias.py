@@ -5,14 +5,14 @@
 """
 
 import argparse
+import logging
 import os
 import sys
-import logging
 
 from setuptools_scm import get_version
 
-import utils
 import strings
+import utils
 
 logger = logging.getLogger(__name__)
 logger.setLevel("INFO")
@@ -43,6 +43,7 @@ def main():
     source = os.path.abspath(args.source)
     destination = os.path.abspath(args.destination)
 
+    #  TODO: Check for symbolic / hard links
     if not utils.Path.check_path(source):
         logger.error(strings.PATH_NOT_FOUND.format(source))
         sys.exit(1)
@@ -50,13 +51,15 @@ def main():
         logger.error(strings.PATH_NOT_FOUND.format(destination))
         sys.exit(1)
 
+    #  TODO: Make this better?
     create_alias_output = utils.Alias.create_alias(source, destination)
 
-    print(create_alias_output[utils.Alias.CMD_STRING])
-    print(create_alias_output[utils.Alias.CODE])
-    print(create_alias_output[utils.Alias.OUT])
-    print(create_alias_output[utils.Alias.ERROR])
+    logger.log("INFO", create_alias_output[utils.Alias.CMD_STRING])
+    logger.log("DEBUG", create_alias_output[utils.Alias.CODE])
+    logger.log("DEBUG", create_alias_output[utils.Alias.OUT])
+    logger.log("ERROR", create_alias_output[utils.Alias.ERROR])
 
+    #  TODO: Is there a better way to rename the alias?
     if args.alias_name:
         utils.Alias.rename_alias(source, destination, args.alias_name)
 
