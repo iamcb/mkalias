@@ -1,9 +1,9 @@
-from setuptools import setup
+import setuptools
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-setup(
+setuptools.setup(
     name='mkalias-foss',
     author='Adam Bennett',
     author_email="iamcb@teck90.ca",
@@ -13,7 +13,7 @@ setup(
     description='CLI app to create Finder aliases in OS X',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=['mkalias_cli'],
+    packages=setuptools.find_packages(),
     setup_requires=['setuptools_scm'],
     install_requires=['setuptools_scm', 'osascript', ],
     classifiers=[
