@@ -5,17 +5,17 @@
 """
 
 import argparse
+import logging
 import os
 import sys
-import logging
 
 from setuptools_scm import get_version
 
-import utils
-import strings
+from mkalias_cli import strings
+from mkalias_cli import utils
 
 logger = logging.getLogger(__name__)
-logger.setLevel("INFO")
+logger.setLevel(logging.DEBUG)
 
 version = get_version()
 
@@ -23,7 +23,7 @@ version = get_version()
 def parse_args():
     """
     Function to setup and hold argument parser
-    :return: parser.parse_args() object -
+    :return: parser.parse_args() object
     """
     parser = argparse.ArgumentParser(prog='mkalias',
                                      description='Application to create Finder aliases from the command line')
@@ -43,6 +43,7 @@ def main():
     source = os.path.abspath(args.source)
     destination = os.path.abspath(args.destination)
 
+    #  TODO: Check for symbolic / hard links
     if not utils.Path.check_path(source):
         logger.error(strings.PATH_NOT_FOUND.format(source))
         sys.exit(1)
@@ -50,13 +51,19 @@ def main():
         logger.error(strings.PATH_NOT_FOUND.format(destination))
         sys.exit(1)
 
-    create_alias_output = utils.Alias.create_alias(source, destination)
+    #  TODO: Make this better?
+    if args.alias_name:
+        utils.Alias.create_alias(source, destination, args.alias_name)
+    else:
+        utils.Alias.create_alias(source, destination)
+        # create_alias_output = utils.Alias.create_alias(source, destination)
 
-    print(create_alias_output[utils.Alias.CMD_STRING])
-    print(create_alias_output[utils.Alias.CODE])
-    print(create_alias_output[utils.Alias.OUT])
-    print(create_alias_output[utils.Alias.ERROR])
+    # logger.log(logging.INFO, create_alias_output[utils.Alias.CMD_STRING])
+    # logger.log(logging.DEBUG, create_alias_output[utils.Alias.CODE])
+    # logger.log(logging.DEBUG, create_alias_output[utils.Alias.OUT])
+    # logger.log(logging.ERROR, create_alias_output[utils.Alias.ERROR])
 
+    #  TODO: Is there a better way to rename the alias?
     if args.alias_name:
         utils.Alias.rename_alias(source, destination, args.alias_name)
 

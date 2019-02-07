@@ -29,16 +29,27 @@ class Alias:
     ERROR = 3
 
     @staticmethod
-    def create_alias(source, destination) -> tuple:
+    def create_alias(source, destination, name=None) -> tuple:
         """
         Creates and runs the AppleScript required to create the alias
         :param source: File or Directory to create an alias of
         :param destination: Destination directory of the new alias
+        :param name: Name of new alias - OPTIONAL
         :return: tuple containing the AppleScript Created, Code, Output of AppleScript, and Errors - in that order
         """
 
-        cmd_string = 'tell application "Finder" to make alias file to POSIX file "{}" at POSIX file "{}"' \
-            .format(source, destination)
+        #  TODO: Update AppleScript to maybe not be one single command outlined below
+        # tell application "Finder"
+        #     set mySource to POSIX file "/Users/Shared" as alias
+        #     make new alias to mySource at desktop
+        #     set name of result to "MyAlias"
+        # end tell
+        if name is None:
+            cmd_string = 'tell application "Finder" to make alias file to POSIX file "{}" at POSIX file "{}"' \
+                .format(source, destination)
+        else:
+            cmd_string = 'tell application "Finder" to make alias file to POSIX file "{}" at POSIX file "{}"' \
+                         ' with properties {name:"{}"}'.format(source, destination, name)
 
         code, out, error = osascript.run(cmd_string)
 
@@ -55,6 +66,8 @@ class Alias:
         :return: none
         """
 
+        #  TODO: multiple aliases create result in a number being added to each new alias, alias 2, alias 3, etc
+        #       we need to deal with this somehow
         source_head, source_tail = os.path.split(source)
 
         alias_name = source_tail + " alias"
