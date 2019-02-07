@@ -23,7 +23,7 @@ version = get_version()
 def parse_args():
     """
     Function to setup and hold argument parser
-    :return: parser.parse_args() object -
+    :return: parser.parse_args() object
     """
     parser = argparse.ArgumentParser(prog='mkalias',
                                      description='Application to create Finder aliases from the command line')

@@ -1,9 +1,9 @@
-import setuptools
+from setuptools import setup
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-setuptools.setup(
+setup(
     name='mkalias-foss',
     author='Adam Bennett',
     author_email="iamcb@teck90.ca",
