@@ -13,7 +13,7 @@ setuptools.setup(
     description='CLI app to create Finder aliases in OS X',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=['mkalias_cli'],
+    packages=setuptools.find_packages(),
     setup_requires=['setuptools_scm'],
     install_requires=['setuptools_scm', 'osascript', ],
     classifiers=[
