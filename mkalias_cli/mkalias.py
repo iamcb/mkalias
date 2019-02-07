@@ -1,19 +1,30 @@
 #!/usr/bin/env python3
 """
-    mkalias.py - CLI app to create finder aliases./mk
+    mkalias.py - CLI app to create finder aliases.
 
 """
 
 import argparse
+import logging
 import os
+import sys
 
-import osascript
 from setuptools_scm import get_version
+
+import strings
+import utils
+
+logger = logging.getLogger(__name__)
+logger.setLevel("INFO")
 
 version = get_version()
 
 
 def parse_args():
+    """
+    Function to setup and hold argument parser
+    :return: parser.parse_args() object
+    """
     parser = argparse.ArgumentParser(prog='mkalias',
                                      description='Application to create Finder aliases from the command line')
 
@@ -26,77 +37,34 @@ def parse_args():
     return parser.parse_args()
 
 
-def check_path(source, destination):
-    path_exists = True
-    source = os.path.abspath(source)
-    destination_head, destination_tail = os.path.split(destination)
-
-    def print_not_found_error(location):
-        print("Error '{}' not found!".format(location))
-
-        if not os.path.isdir(source):
-            print_not_found_error(source)
-            path_exists = False
-        elif not os.path.isdir(destination_head):
-            print_not_found_error(destination_head)
-            path_exists = False
-        if not os.path.isfile(source):
-            print_not_found_error(source)
-            path_exists = False
-        elif not os.path.isdir(destination_head):
-            print_not_found_error(destination_head)
-            path_exists = False
-
-    if path_exists:
-        print("Source Dir - '{}'".format(source))
-        print("Destination Dir - '{}'".format(destination))
-
-    return path_exists
-
-
-def create_alias(source, destination):
-    command_string = 'tell application "Finder" to make alias file to POSIX file "{}" at POSIX file "{}"' \
-        .format(source, destination)
-
-    code, out, error = osascript.run(command_string)
-
-    print(command_string)
-    print(code)
-    print(out)
-    print(error)
-
-
-def rename_alias(source, destination, name):
-    """
-    Rename the new alias to a custom name instead of "example alias"
-
-    :param source: Name of the source file/dir for the alias
-    :param destination: destination for the alias
-    :return: none
-    """
-
-    source_head, source_tail = os.path.split(source)
-
-    alias_name = source_tail + " alias"
-    alias_path = destination + "/" + alias_name
-    new_name_path = destination + "/" + name
-
-    os.rename(alias_path, new_name_path)
-    print(new_name_path)
-
-
 def main():
     args = parse_args()
 
     source = os.path.abspath(args.source)
     destination = os.path.abspath(args.destination)
 
-    check_path(source, destination)
+    #  TODO: Check for symbolic / hard links
+    if not utils.Path.check_path(source):
+        logger.error(strings.PATH_NOT_FOUND.format(source))
+        sys.exit(1)
+    elif not utils.Path.check_path(destination):
+        logger.error(strings.PATH_NOT_FOUND.format(destination))
+        sys.exit(1)
 
-    create_alias(source, destination)
+    #  TODO: Make this better?
+    create_alias_output = utils.Alias.create_alias(source, destination)
 
+    logger.log("INFO", create_alias_output[utils.Alias.CMD_STRING])
+    logger.log("DEBUG", create_alias_output[utils.Alias.CODE])
+    logger.log("DEBUG", create_alias_output[utils.Alias.OUT])
+    logger.log("ERROR", create_alias_output[utils.Alias.ERROR])
+
+    #  TODO: Is there a better way to rename the alias?
     if args.alias_name:
-        rename_alias(source, destination, args.alias_name)
+        utils.Alias.rename_alias(source, destination, args.alias_name)
+
+    logging.shutdown()
+    sys.exit(0)  # exit gracefully
 
 
 if __name__ == "__main__":
