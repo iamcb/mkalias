@@ -49,26 +49,3 @@ class Alias:
         code, out, error = osascript.run(cmd_string)
 
         return cmd_string, code, out, error
-
-    # TODO: Remove this method as it is now redundant
-    # @staticmethod
-    # def rename_alias(source, destination, name):
-    #     """
-    #     Rename the new alias to a custom name instead of "example alias"
-    #
-    #     :param name: custom name of new alias
-    #     :param source: Name of the source file/dir for the alias
-    #     :param destination: destination for the alias
-    #     :return: none
-    #     """
-    #
-    #     #  TODO: multiple aliases create result in a number being added to each new alias, alias 2, alias 3, etc
-    #     #       we need to deal with this somehow
-    #     source_head, source_tail = os.path.split(source)
-    #
-    #     alias_name = source_tail + " alias"
-    #     alias_path = destination + "/" + alias_name
-    #     new_name_path = destination + "/" + name
-    #
-    #     os.rename(alias_path, new_name_path)
-    #     print(new_name_path)

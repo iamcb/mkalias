@@ -17,6 +17,11 @@ from mkalias_cli import utils
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+
+logger.addHandler(ch)
+
 version = get_version()
 
 
@@ -58,10 +63,10 @@ def main():
         create_alias_output = utils.Alias.create_alias(source, destination)
         # create_alias_output = utils.Alias.create_alias(source, destination)
 
-    logger.log(logging.INFO, create_alias_output[utils.Alias.CMD_STRING])
-    logger.log(logging.DEBUG, create_alias_output[utils.Alias.CODE])
-    logger.log(logging.DEBUG, create_alias_output[utils.Alias.OUT])
-    logger.log(logging.ERROR, create_alias_output[utils.Alias.ERROR])
+    logger.info(create_alias_output[utils.Alias.CMD_STRING])
+    logger.debug(create_alias_output[utils.Alias.CODE])
+    logger.debug(create_alias_output[utils.Alias.OUT])
+    logger.error(create_alias_output[utils.Alias.ERROR])
 
     logging.shutdown()
     sys.exit(0)  # exit gracefully
