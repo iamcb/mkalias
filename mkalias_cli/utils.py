@@ -1,7 +1,8 @@
 import os
 
 import osascript
-import strings
+
+from mkalias_cli import strings
 
 
 class Path:
@@ -38,41 +39,36 @@ class Alias:
         :return: tuple containing the AppleScript Created, Code, Output of AppleScript, and Errors - in that order
         """
 
-        #  TODO: Update AppleScript to maybe not be one single command outlined below
-        # tell application "Finder"
-        #     set mySource to POSIX file "/Users/Shared" as alias
-        #     make new alias to mySource at desktop
-        #     set name of result to "MyAlias"
-        # end tell
         if name is None:
             cmd_string = 'tell application "Finder" to make alias file to POSIX file "{}" at POSIX file "{}"' \
                 .format(source, destination)
         else:
             cmd_string = 'tell application "Finder" to make alias file to POSIX file "{}" at POSIX file "{}"' \
-                         ' with properties {name:"{}"}'.format(source, destination, name)
+                         ' with properties {{name:"{}"}}'.format(source, destination, name)
 
         code, out, error = osascript.run(cmd_string)
 
         return cmd_string, code, out, error
 
-    @staticmethod
-    def rename_alias(source, destination, name):
-        """
-        Rename the new alias to a custom name instead of "example alias"
-
-        :param name: custom name of new alias
-        :param source: Name of the source file/dir for the alias
-        :param destination: destination for the alias
-        :return: none
-        """
-
-        #  TODO: multiple aliases create result in a number being added to each new alias, alias 2, alias 3, etc
-        #       we need to deal with this somehow
-        source_head, source_tail = os.path.split(source)
-
-        alias_name = source_tail + " alias"
-        alias_path = destination + "/" + alias_name
-        new_name_path = destination + "/" + name
-
-        os.rename(alias_path, new_name_path)
-        print(new_name_path)
+    # TODO: Remove this method as it is now redundant
+    # @staticmethod
+    # def rename_alias(source, destination, name):
+    #     """
+    #     Rename the new alias to a custom name instead of "example alias"
+    #
+    #     :param name: custom name of new alias
+    #     :param source: Name of the source file/dir for the alias
+    #     :param destination: destination for the alias
+    #     :return: none
+    #     """
+    #
+    #     #  TODO: multiple aliases create result in a number being added to each new alias, alias 2, alias 3, etc
+    #     #       we need to deal with this somehow
+    #     source_head, source_tail = os.path.split(source)
+    #
+    #     alias_name = source_tail + " alias"
+    #     alias_path = destination + "/" + alias_name
+    #     new_name_path = destination + "/" + name
+    #
+    #     os.rename(alias_path, new_name_path)
+    #     print(new_name_path)
