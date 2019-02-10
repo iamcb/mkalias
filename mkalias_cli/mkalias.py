@@ -79,7 +79,7 @@ def main():
     source = os.path.abspath(args.source)
     destination = os.path.abspath(args.destination)
 
-    #  TODO: Check for symbolic / hard links if necessary
+    #  TODO: Check for symbolic / hard links if necessary for aliasing
     if not os.path.exists(source):
         logger.error(strings.PATH_NOT_FOUND.format(source))
         sys.exit(1)
