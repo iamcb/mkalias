@@ -37,4 +37,4 @@ This project is licensed under the GPLv3 License - see the [LICENSE.txt](LICENSE
 
 ## Acknowledgments
 
-osascript - https://pypi.org/project/osascript/
+osascript - https://pypi.org/project/osascript/ - https://github.com/looking-for-a-job/osascript.py
