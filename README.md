@@ -4,33 +4,22 @@ Application to create Finder aliases from the command line
 
 ## Getting Started
 
-This project is available as a pip3 installable package from pypi.org
-the source can be downloaded from [GitHub](https://github.com/iamcb/mkalias)
+```mkalias source destination```  or ```mkalias -n alias_name source destination```
+
+```mkalias -h``` To display the help menu.
+
+The source can be downloaded from [GitHub](https://github.com/iamcb/mkalias)
 
 ### Installing
+This is programmed using python3.7 and not made to be compatible with
+lower versions of python.
 ```
 pip3 install mkalias-foss
 ```
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Built With
-
-osascript - https://pypi.org/project/osascript/
-
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/iamcb/mkalias/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
@@ -48,6 +37,4 @@ This project is licensed under the GPLv3 License - see the [LICENSE.txt](LICENSE
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+osascript - https://pypi.org/project/osascript/
