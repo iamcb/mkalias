@@ -9,12 +9,12 @@ import os
 import sys
 
 import osascript
-import setuptools_scm
 
+import version
 from mkalias_cli import strings
 
 #  Get version info
-version = setuptools_scm.get_version()
+version = version.version
 
 # Setup Logging
 logger = logging.getLogger(__name__)

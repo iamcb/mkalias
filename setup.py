@@ -8,7 +8,9 @@ setuptools.setup(
     author='Adam Bennett',
     author_email="iamcb@teck90.ca",
     url='https://github.com/iamcb/mkalias',
-    use_scm_version=True,
+    use_scm_version={
+        'write_to': 'version.py',
+    },
     license='LICENSE.txt',
     description='CLI app to create Finder aliases in OS X',
     long_description=long_description,
