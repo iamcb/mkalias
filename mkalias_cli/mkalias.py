@@ -10,7 +10,7 @@ import sys
 
 import osascript
 
-import version
+from mkalias_cli import version
 from mkalias_cli import strings
 
 #  Get version info
