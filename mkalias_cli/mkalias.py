@@ -10,8 +10,8 @@ import sys
 
 import osascript
 
-from mkalias_cli import version
-from mkalias_cli import strings
+from . import version
+from . import strings
 
 #  Get version info
 version = version.version
@@ -107,5 +107,5 @@ def main():
     sys.exit(0)  # exit gracefully
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
