@@ -2,7 +2,6 @@
 """
     mkalias.py - CLI app to create finder aliases.
 """
-
 import argparse
 import logging
 import os
