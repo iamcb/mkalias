@@ -10,11 +10,11 @@ import sys
 
 import osascript
 
-from . import version
 from . import strings
+from .version import version
 
 #  Get version info
-version = version.version
+# version = version.version
 
 # Setup Logging
 logger = logging.getLogger(__name__)
@@ -82,7 +82,7 @@ def main():
     if not os.path.exists(source):
         logger.error(strings.Errors.PATH_NOT_FOUND.format(source))
         sys.exit(1)
-    elif not os.path.exists(destination):
+    if not os.path.exists(destination):
         logger.error(strings.Errors.PATH_NOT_FOUND.format(destination))
         sys.exit(1)
 
@@ -107,5 +107,5 @@ def main():
     sys.exit(0)  # exit gracefully
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
