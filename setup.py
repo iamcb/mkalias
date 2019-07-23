@@ -18,7 +18,7 @@ setuptools.setup(
     # packages=setuptools.find_packages(),
     packages=['mkalias_cli'],
     setup_requires=['setuptools_scm', ],
-    install_requires=['osascript', ],
+    install_requires=['osascript', 'click', ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
