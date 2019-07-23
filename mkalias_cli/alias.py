@@ -2,7 +2,7 @@ import osascript
 
 
 class Alias:
-    #  Constants used for this Class
+    #  Constants used for create method to access returned tuple
     CMD_STRING = 0
     CODE = 1
     OUT = 2
