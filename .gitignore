@@ -3,3 +3,5 @@
 
 /mkalias_foss.egg-info/
 
+/build/
+/dist/
