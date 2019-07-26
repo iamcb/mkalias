@@ -9,14 +9,14 @@ setuptools.setup(
     author_email="iamcb@teck90.ca",
     url='https://github.com/iamcb/mkalias',
     use_scm_version={
-        'write_to': 'mkalias_cli/version.py',
+        'write_to': 'mkalias_foss/version.py',
     },
     license='LICENSE.txt',
     description='CLI app to create Finder aliases in OS X',
     long_description=long_description,
     long_description_content_type="text/markdown",
     # packages=setuptools.find_packages(),
-    packages=['mkalias_cli'],
+    packages=['mkalias_foss'],
     setup_requires=['setuptools_scm', ],
     install_requires=['osascript', 'click', ],
     classifiers=[
@@ -26,6 +26,6 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts':
-            ['mkalias = mkalias_cli.mkalias:main', ],
+            ['mkalias = mkalias_foss.mkalias:main', ],
     }
 )
